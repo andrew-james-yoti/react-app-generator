@@ -1,0 +1,33 @@
+{
+  "name": "rag",
+  "version": "0.0.1",
+  "description": "Generate React App and project elements",
+  "main": "bin/react-app-generator-cli.js",
+  "bin": {
+    "rag": "./bin/react-app-generator-cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "React",
+    "CLI"
+  ],
+  "author": "andrew.james@yoti.com",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "2.4.2",
+    "clear": "0.1.0",
+    "commander": "3.0.2",
+    "ejs": "2.7.1",
+    "figlet": "1.2.4",
+    "rc": "1.2.8"
+  },
+  "engines": ">= 10.15.1"
+}
