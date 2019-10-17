@@ -1,0 +1,5 @@
+[structure.app]
+    root = apptest/testsrc
+    components = components
+    services = services
+    
