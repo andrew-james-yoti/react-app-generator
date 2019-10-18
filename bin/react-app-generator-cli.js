@@ -6,6 +6,7 @@ const figlet = require('figlet');
 const components = require('../lib/components/rag-components');
 const services = require('../lib/services/rag-services');
 const utils = require('../lib/utils/rag-utils');
+const context = require('../lib/context/rag-context');
 
 const APP_NAME = 'rag';
 const appCfg = require('rc')(APP_NAME, {
@@ -13,6 +14,8 @@ const appCfg = require('rc')(APP_NAME, {
         app: {
             root: './src',
             components: 'components',
+            context: 'context',
+            // provider: 'components/provider',
             services: 'services',
             utils: 'utils',
             enum: 'enum',
@@ -44,6 +47,7 @@ program
 
 program
 .option('-c, --component <name>', 'create component')
+.option('-C, --context <name>', 'create context')
 .option('-s, --service <name>', 'create service')
 .option('-u, --util <name>', 'create util')
 .option('-e, --enum <name>', 'create enum')
@@ -95,3 +99,18 @@ if (program.hook) {
     
 }
 
+/*** Generate Context ***/
+if (program.context) {
+    const contextPath = `${app.root}/${app.context}`;
+    const providerPath = `${app.root}/${app.components}`;
+    context(
+        contextPath,
+        providerPath,
+        program.context,
+        (err) => {
+            if (err) {
+                console.error(chalk.red(err.message));
+            }
+        }
+    )
+}
