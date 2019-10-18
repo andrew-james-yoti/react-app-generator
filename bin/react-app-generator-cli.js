@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const components = require('../lib/components/rag-components');
 const services = require('../lib/services/rag-services');
+const utils = require('../lib/utils/rag-utils');
 
 const APP_NAME = 'rag';
 const appCfg = require('rc')(APP_NAME, {
@@ -19,6 +20,8 @@ const appCfg = require('rc')(APP_NAME, {
         }
     }
 });
+
+const { structure: { app } } = appCfg;
 
 /*** RAG ***/
 clear();
@@ -39,7 +42,6 @@ program
     console.log('Generate project scaffold');
 });
 
-
 program
 .option('-c, --component <name>', 'create component')
 .option('-s, --service <name>', 'create service')
@@ -49,32 +51,36 @@ program
 
 program.parse(process.argv);
 
+
 /*** Generate Components ***/
 if (program.component) {
-    const { structure: { app } } = appCfg;
+    // const { structure: { app } } = appCfg;
     const componentPath = `${app.root}/${app.components}`;
     components(componentPath, program.component, (err) => {
         if (err) {
             console.error(chalk.red(err.message));
-            console.warn(chalk.yellow('ensure you\'re using node version 10+'));
         }
     });
 }
 /*** Generate Service ***/
 if (program.service) {
-    const { structure: { app } } = appCfg;
+    // const { structure: { app } } = appCfg;
     const servicesPath = `${app.root}/${app.services}`;
     services(servicesPath, program.service, (err) => {
         if (err) {
             console.error(chalk.red(err.message));
-            console.warn(chalk.yellow('ensure you\'re using node version 10+'));
         }
     });
 }
 
 /*** Generate Utils ***/
 if (program.util) {
-    
+    const utilsPath = `${app.root}/${app.utils}`;
+    utils(utilsPath, program.util, (err) => {
+        if (err) {
+            console.error(chalk.red(err.message));
+        }
+    });
 }
 
 
