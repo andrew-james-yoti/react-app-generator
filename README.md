@@ -19,11 +19,39 @@ The following commands will generate named template folders and files
 ```shell
 rag -c my-component-name
 ```
+expected output
+- index.jsx
+- my-component-name.test.jsx
+- my-component-name.scss
+- my-component-name.jsx
 
 ### Generate Services
 ```shell
-rag -s my-service-name
+rag -s serviceName
 ```
+
+expected output
+- serviceName.service.test.js
+- serviceName.service.js
+
+### Generate Utils
+```shell
+rag -u utilName
+```
+
+expected output
+- utilName.utils.test.js
+- utilName.utils.js
+
+### Generate Context
+```shell
+rag -C context-name
+```
+
+expected output
+- index.js
+- context-name-context-provider.jsx
+- context-name.context.js
 
 ### Configuration
 
