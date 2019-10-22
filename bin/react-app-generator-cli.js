@@ -5,6 +5,8 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const components = require('../lib/components/rag-components');
 const services = require('../lib/services/rag-services');
+const utils = require('../lib/utils/rag-utils');
+const context = require('../lib/context/rag-context');
 
 const APP_NAME = 'rag';
 const appCfg = require('rc')(APP_NAME, {
@@ -12,6 +14,7 @@ const appCfg = require('rc')(APP_NAME, {
         app: {
             root: './src',
             components: 'components',
+            context: 'context',
             services: 'services',
             utils: 'utils',
             enum: 'enum',
@@ -19,6 +22,8 @@ const appCfg = require('rc')(APP_NAME, {
         }
     }
 });
+
+const { structure: { app } } = appCfg;
 
 /*** RAG ***/
 clear();
@@ -39,9 +44,9 @@ program
     console.log('Generate project scaffold');
 });
 
-
 program
 .option('-c, --component <name>', 'create component')
+.option('-C, --context <name>', 'create context')
 .option('-s, --service <name>', 'create service')
 .option('-u, --util <name>', 'create util')
 .option('-e, --enum <name>', 'create enum')
@@ -49,32 +54,34 @@ program
 
 program.parse(process.argv);
 
+
 /*** Generate Components ***/
 if (program.component) {
-    const { structure: { app } } = appCfg;
     const componentPath = `${app.root}/${app.components}`;
     components(componentPath, program.component, (err) => {
         if (err) {
             console.error(chalk.red(err.message));
-            console.warn(chalk.yellow('ensure you\'re using node version 10+'));
         }
     });
 }
 /*** Generate Service ***/
 if (program.service) {
-    const { structure: { app } } = appCfg;
     const servicesPath = `${app.root}/${app.services}`;
     services(servicesPath, program.service, (err) => {
         if (err) {
             console.error(chalk.red(err.message));
-            console.warn(chalk.yellow('ensure you\'re using node version 10+'));
         }
     });
 }
 
 /*** Generate Utils ***/
 if (program.util) {
-    
+    const utilsPath = `${app.root}/${app.utils}`;
+    utils(utilsPath, program.util, (err) => {
+        if (err) {
+            console.error(chalk.red(err.message));
+        }
+    });
 }
 
 
@@ -89,3 +96,18 @@ if (program.hook) {
     
 }
 
+/*** Generate Context ***/
+if (program.context) {
+    const contextPath = `${app.root}/${app.context}`;
+    const providerPath = `${app.root}/${app.components}`;
+    context(
+        contextPath,
+        providerPath,
+        program.context,
+        (err) => {
+            if (err) {
+                console.error(chalk.red(err.message));
+            }
+        }
+    )
+}
