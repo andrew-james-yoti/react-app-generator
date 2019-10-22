@@ -57,7 +57,6 @@ program.parse(process.argv);
 
 /*** Generate Components ***/
 if (program.component) {
-    // const { structure: { app } } = appCfg;
     const componentPath = `${app.root}/${app.components}`;
     components(componentPath, program.component, (err) => {
         if (err) {
@@ -67,7 +66,6 @@ if (program.component) {
 }
 /*** Generate Service ***/
 if (program.service) {
-    // const { structure: { app } } = appCfg;
     const servicesPath = `${app.root}/${app.services}`;
     services(servicesPath, program.service, (err) => {
         if (err) {
