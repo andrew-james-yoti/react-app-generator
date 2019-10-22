@@ -15,7 +15,6 @@ const appCfg = require('rc')(APP_NAME, {
             root: './src',
             components: 'components',
             context: 'context',
-            // provider: 'components/provider',
             services: 'services',
             utils: 'utils',
             enum: 'enum',
