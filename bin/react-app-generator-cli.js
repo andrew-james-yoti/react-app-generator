@@ -87,13 +87,13 @@ if (program.util) {
 
 /*** Generate Enum ***/
 if (program.enum) {
-    
+
 }
 
 
 /*** Generate Hooks ***/
 if (program.hook) {
-    
+    const hooksPath = `${app.root}/${app.hooks}`;
 }
 
 /*** Generate Context ***/
